@@ -1,0 +1,37 @@
+server:
+    port: ${SERVER_PORT:8080}
+
+spring:
+    servlet:
+        multipart:
+            max-request-size: 50MB
+            max-file-size: 50MB
+    main:
+        banner-mode: off
+    jpa:
+        show-sql: ${SHOW_SQL:true}
+        open-in-view: ${OPEN_IN_VIEW:false}
+        hibernate:
+            ddl-auto: create-drop
+        properties:
+            hibernate:
+                jdbc:
+                    batch_size: 20
+                batch_versioned_data: true
+                order_inserts: true
+                order_updates: true
+                generate_statistics: ${HIBERNATE_GENERATE_STATISTICS:false}
+    datasource:
+        driver-class-name: org.postgresql.Driver
+        url: ${DATASOURCE_URL:jdbc:postgresql://localhost:5432/messagesDB}
+        username: ${DATASOURCE_USERNAME:nyos}
+        password: ${DATASOURCE_PASSWORD:purple}
+        type: com.zaxxer.hikari.HikariDataSource
+        hikari:
+            connectionTimeout: 30000
+            idleTimeout: 60000
+            maxLifetime: 7190000
+            minimumIdle: 2
+            maximumPoolSize: 50
+    liquibase:
+        default-schema: public
