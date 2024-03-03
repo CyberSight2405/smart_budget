@@ -12,7 +12,7 @@ spring:
         show-sql: ${SHOW_SQL:true}
         open-in-view: ${OPEN_IN_VIEW:false}
         hibernate:
-            ddl-auto: create-drop
+            ddl-auto: update
         properties:
             hibernate:
                 jdbc:
@@ -35,3 +35,8 @@ spring:
             maximumPoolSize: 50
     liquibase:
         default-schema: public
+
+service:
+    file-system-service:
+        url: ${FILE-SYSTEM-SERVICE:http://localhost:8081}
+
