@@ -27,8 +27,6 @@ public class User {
     private String email;
     @Column(name = "phone")
     private String phone;
-    @Column
-    private byte[] image;
-    @Column
+    @Column(name = "imageMinioName")
     private String imageMinioName;
 }

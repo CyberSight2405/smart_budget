@@ -1,5 +1,5 @@
 server:
-    port: ${SERVER_PORT:8080}
+    port: ${SERVER_PORT:8082}
 
 spring:
     servlet:
@@ -21,21 +21,12 @@ spring:
                 order_inserts: true
                 order_updates: true
                 generate_statistics: ${HIBERNATE_GENERATE_STATISTICS:false}
+                dialect: org.hibernate.dialect.PostgreSQLDialect
     datasource:
         driver-class-name: org.postgresql.Driver
         url: ${DATASOURCE_URL:jdbc:postgresql://localhost:5432/messagesDB}
         username: ${DATASOURCE_USERNAME:nyos}
         password: ${DATASOURCE_PASSWORD:purple}
-        type: com.zaxxer.hikari.HikariDataSource
-        hikari:
-            connectionTimeout: 30000
-            idleTimeout: 60000
-            maxLifetime: 7190000
-            minimumIdle: 2
-            maximumPoolSize: 50
-    liquibase:
-        default-schema: public
-
 service:
     file-system-service:
         url: ${FILE-SYSTEM-SERVICE:http://localhost:8081}

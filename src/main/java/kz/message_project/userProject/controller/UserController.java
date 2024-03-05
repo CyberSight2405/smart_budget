@@ -1,9 +1,16 @@
 package kz.message_project.userProject.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import kz.message_project.userProject.dto.UserDto;
 import kz.message_project.userProject.entity.User;
 import kz.message_project.userProject.services.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ContentDisposition;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -17,8 +24,14 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/{id}")
-    public UserDto findById(@PathVariable Long id){
-        return userService.getUser(id);
+    public ResponseEntity<byte[]> findById(@PathVariable Long id){
+        UserDto userDto = userService.getUser(id);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.IMAGE_PNG);
+        headers.setContentDisposition(ContentDisposition.builder("attachment").filename("pngFile").build());
+
+        return new ResponseEntity<>(userDto.getImage(), headers, HttpStatus.OK);
     }
 
     @GetMapping
@@ -26,9 +39,16 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-    @PostMapping
-    public void createUser(@ModelAttribute User user, @RequestParam("file") MultipartFile file){
-        userService.createUser(user, file);
+    @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+    public ResponseEntity<Void> createUser(@RequestPart(name = "userJson") String userJson, @RequestPart("image") MultipartFile image){
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            User user = objectMapper.readValue(userJson, User.class);
+            userService.createUser(user, image);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")

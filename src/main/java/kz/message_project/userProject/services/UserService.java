@@ -40,9 +40,8 @@ public class UserService {
     }
 
     public void createUser(User user, MultipartFile image){
-        String imageMinioName = image.getOriginalFilename() + "_" + UUID.randomUUID();
-
-        fileSysyemClient.uploadToMinio(image);
+        String imageMinioName = fileSysyemClient.uploadToMinio(image);
+        user.setImageMinioName(imageMinioName);
         userRepository.save(user);
     }
 
