@@ -24,14 +24,14 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<byte[]> findById(@PathVariable Long id){
+    public UserDto findById(@PathVariable Long id){
         UserDto userDto = userService.getUser(id);
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.IMAGE_PNG);
-        headers.setContentDisposition(ContentDisposition.builder("attachment").filename("pngFile").build());
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.setContentType(MediaType.IMAGE_PNG);
+//        headers.setContentDisposition(ContentDisposition.builder("attachment").filename("pngFile").build());
 
-        return new ResponseEntity<>(userDto.getImage(), headers, HttpStatus.OK);
+        return userDto;
     }
 
     @GetMapping
@@ -40,7 +40,7 @@ public class UserController {
     }
 
     @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-    public ResponseEntity<Void> createUser(@RequestPart(name = "userJson") String userJson, @RequestPart("image") MultipartFile image){
+    public ResponseEntity<HttpStatus> createUser(@RequestPart(name = "userJson") String userJson, @RequestPart("image") MultipartFile image){
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             User user = objectMapper.readValue(userJson, User.class);
