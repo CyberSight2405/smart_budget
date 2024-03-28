@@ -1,18 +1,16 @@
 package kz.message_project.userProject.dto;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Data
-public class UserDto {
+public class AuthenticationDto {
     private String username;
-    private String name;
-    private String surname;
-    private String email;
-    private String phone;
-    private String password;
-    private byte[] image;
+
+    String password;
 }

@@ -9,24 +9,27 @@ spring:
     main:
         banner-mode: off
     jpa:
-        show-sql: ${SHOW_SQL:true}
-        open-in-view: ${OPEN_IN_VIEW:false}
+        show-sql: true
+#        open-in-view: false
         hibernate:
-            ddl-auto: update
+            ddl-auto: create-drop
         properties:
             hibernate:
-                jdbc:
-                    batch_size: 20
-                batch_versioned_data: true
-                order_inserts: true
-                order_updates: true
-                generate_statistics: ${HIBERNATE_GENERATE_STATISTICS:false}
-                dialect: org.hibernate.dialect.PostgreSQLDialect
+                format_sql: true
+        #                jdbc:
+#                    batch_size: 20
+#                batch_versioned_data: true
+#                order_inserts: true
+#                order_updates: true
+#                generate_statistics: ${HIBERNATE_GENERATE_STATISTICS:false}
+#                dialect: org.hibernate.dialect.PostgreSQLDialect
+        database: postgresql
+        database-platform: org.hibernate.dialect.PostgreSQLDialect
     datasource:
-        driver-class-name: org.postgresql.Driver
         url: ${DATASOURCE_URL:jdbc:postgresql://localhost:5432/messagesDB}
         username: ${DATASOURCE_USERNAME:nyos}
         password: ${DATASOURCE_PASSWORD:purple}
+        driver-class-name: org.postgresql.Driver
 service:
     file-system-service:
         url: ${FILE-SYSTEM-SERVICE:http://localhost:8081}
