@@ -20,15 +20,15 @@ public class User implements UserDetails {
     @Column(name = "id")
     @Id
     private Long id;
-    @Column(name = "username", nullable = false)
+    @Column(name = "username")
     private String username;
-    @Column(name = "name", nullable = false)
+    @Column(name = "name")
     private String name;
     @Column(name = "surname")
     private String surname;
-    @Column(name = "password", nullable = false)
+    @Column(name = "password")
     private String password;
-    @Column(name = "email", nullable = false)
+    @Column(name = "email")
     private String email;
     @Column(name = "phone")
     private String phone;
@@ -46,6 +46,22 @@ public class User implements UserDetails {
     @Override
     public boolean isAccountNonExpired() {
         return true;
+    }
+
+    public User(Long id,String username, String name, String surname, String email, String phone) {
+        this.id = id;
+        this.username = username;
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.phone = phone;
+    }
+    public User(String username, String name, String surname, String email, String phone) {
+        this.username = username;
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.phone = phone;
     }
 
     @Override

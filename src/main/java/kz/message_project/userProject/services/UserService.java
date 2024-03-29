@@ -4,6 +4,7 @@ import kz.message_project.userProject.client.FileSysyemClient;
 import kz.message_project.userProject.dto.ImageDto;
 import kz.message_project.userProject.dto.UserDto;
 import kz.message_project.userProject.entity.User;
+import kz.message_project.userProject.mapper.UserMapper;
 import kz.message_project.userProject.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,8 +14,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -22,52 +21,40 @@ import java.util.UUID;
 public class UserService {
     private final UserRepository userRepository;
     private final FileSysyemClient fileSysyemClient;
+    private final UserMapper userMapper;
 
     public UserDto getUser(Long id){
         UserDto userDto = new UserDto();
-        Optional<User> userOpt = userRepository.findById(id);
-        User user = userOpt.orElse(null);
+        User user = userRepository.findById(id).orElse(null);
+
         if (Objects.nonNull(user)){
             byte [] image = fileSysyemClient.downloadFromMinio(user.getImageMinioName());
-            userDto.setName(user.getName());
-            userDto.setSurname(user.getSurname());
-            userDto.setUsername(user.getUsername());
-            userDto.setPhone(user.getPhone());
-            userDto.setEmail(user.getEmail());
+            userDto = userMapper.mapToUserDto(user);
             userDto.setImage(image);
         }
         return userDto;
     }
 
-    public void createUser(User user, MultipartFile image){
+    public UserDto createUser(User user, MultipartFile image){
+        if(Objects.isNull(user)){
+            throw new NullPointerException("The User should not be null");
+        }
         String imageMinioName = fileSysyemClient.uploadToMinio(image);
         user.setImageMinioName(imageMinioName);
-        userRepository.save(user);
+        var savedUser = userRepository.save(user);
+        return userMapper.mapToUserDto(savedUser);
     }
 
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
     }
 
-    public void updateUser(User user) {
-        userRepository.save(user);
+    public UserDto updateUser(User user) {
+        var savedUser = userRepository.save(user);
+        return userMapper.mapToUserDto(savedUser);
     }
 
     public List<User> getAllUsers() {
         return userRepository.findAll();
-    }
-
-    private ImageDto convertToImageDto(MultipartFile image){
-        ImageDto imageDto = new ImageDto();
-        try {
-            imageDto.setBytes(image.getBytes());
-            imageDto.setSize(image.getSize());
-            imageDto.setContentType(image.getContentType());
-            imageDto.setOriginalFileName(image.getOriginalFilename());
-            return imageDto;
-        } catch (IOException e) {
-            log.error("Error when convert to ImageDto: {}", e.getMessage());
-        }
-        return null;
     }
 }

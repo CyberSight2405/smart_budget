@@ -24,14 +24,18 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/{id}")
-    public UserDto findById(@PathVariable Long id){
+    public ResponseEntity<UserDto> findById(@PathVariable Long id){
         UserDto userDto = userService.getUser(id);
 
 //        HttpHeaders headers = new HttpHeaders();
 //        headers.setContentType(MediaType.IMAGE_PNG);
 //        headers.setContentDisposition(ContentDisposition.builder("attachment").filename("pngFile").build());
 
-        return userDto;
+        if (userDto != null) {
+            return ResponseEntity.ok(userDto);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @GetMapping
@@ -40,11 +44,11 @@ public class UserController {
     }
 
     @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-    public ResponseEntity<HttpStatus> createUser(@RequestPart(name = "userJson") String userJson, @RequestPart("image") MultipartFile image){
+    public ResponseEntity<HttpStatus> createUser(@RequestPart("userJson") String userJson, @RequestPart("image") MultipartFile image){
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             User user = objectMapper.readValue(userJson, User.class);
-            userService.createUser(user, image);
+            var userDto = userService.createUser(user, image);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
@@ -58,6 +62,6 @@ public class UserController {
 
     @PutMapping("/{id}")
     public void updateUser(@RequestBody User user){
-        userService.updateUser(user);
+        var userDto = userService.updateUser(user);
     }
 }

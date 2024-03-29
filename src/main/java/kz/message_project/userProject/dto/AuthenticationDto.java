@@ -11,6 +11,5 @@ import lombok.NoArgsConstructor;
 @Data
 public class AuthenticationDto {
     private String username;
-
     String password;
 }
