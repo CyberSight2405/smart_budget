@@ -4,4 +4,4 @@ WORKDIR app
 
 COPY target/UserService.jar .
 
-ENTRYPOINT ["java","-jar", "-Xms256m", "-Xmx2024m", "UserService.jar"]
+ENTRYPOINT ["java","-jar", "UserService.jar"]

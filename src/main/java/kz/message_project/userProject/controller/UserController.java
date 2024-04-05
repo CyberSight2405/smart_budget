@@ -6,16 +6,14 @@ import kz.message_project.userProject.dto.UserDto;
 import kz.message_project.userProject.entity.User;
 import kz.message_project.userProject.services.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ContentDisposition;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.net.URI;
 import java.util.List;
-import java.util.Optional;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/user")
@@ -31,7 +29,7 @@ public class UserController {
 //        headers.setContentType(MediaType.IMAGE_PNG);
 //        headers.setContentDisposition(ContentDisposition.builder("attachment").filename("pngFile").build());
 
-        if (userDto != null) {
+        if (userDto.getId() != null) {
             return ResponseEntity.ok(userDto);
         } else {
             return ResponseEntity.notFound().build();
@@ -44,15 +42,16 @@ public class UserController {
     }
 
     @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-    public ResponseEntity<HttpStatus> createUser(@RequestPart("userJson") String userJson, @RequestPart("image") MultipartFile image){
+    public ResponseEntity<User> createUser(@RequestPart("userJson") String userJson, @RequestPart("image") MultipartFile image){
         ObjectMapper objectMapper = new ObjectMapper();
+        User user;
         try {
-            User user = objectMapper.readValue(userJson, User.class);
+            user = objectMapper.readValue(userJson, User.class);
             var userDto = userService.createUser(user, image);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return ResponseEntity.ok(user);
     }
 
     @DeleteMapping("/{id}")

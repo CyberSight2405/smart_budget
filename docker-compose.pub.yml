@@ -1,9 +1,7 @@
 version: '3.9'
 services:
     users:
-        build:
-            context: .
-            dockerfile: Dockerfile
+        image: 'nyos777/user-service-dev'
         container_name: 'nyos-user'
         ports:
             - '8082:8082'
@@ -22,12 +20,9 @@ services:
             - FILE-SYSTEM-SERVICE=http://files:8081
         networks:
             - nyos_net
-        volumes:
-            - ./src:/app/src
+        v
     files:
-        build:
-            context: C:/MessageProject/FileSystem
-            dockerfile: Dockerfile
+        image: 'nyos777/file-service-dev'
         container_name: 'nyos-file'
         ports:
             - '8081:8081'
@@ -59,7 +54,7 @@ services:
         networks:
             - nyos_net
         volumes:
-            - nyos_db_data:/var/lib/postgresql/data
+            - nyos_db_data_pub:/var/lib/postgresql/data
     adminer:
         image: adminer
         restart: always
@@ -85,4 +80,4 @@ networks:
     nyos_net:
 
 volumes:
-    nyos_db_data:
+    nyos_db_data_pub:

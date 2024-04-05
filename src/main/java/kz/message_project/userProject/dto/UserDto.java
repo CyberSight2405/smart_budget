@@ -1,5 +1,6 @@
 package kz.message_project.userProject.dto;
 
+import kz.message_project.userProject.entity.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,4 +19,5 @@ public class UserDto {
     private String phone;
     private String password;
     private byte[] image;
+    private Role role;
 }

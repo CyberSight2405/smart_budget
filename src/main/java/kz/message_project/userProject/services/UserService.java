@@ -1,17 +1,17 @@
 package kz.message_project.userProject.services;
 
+import io.micrometer.common.util.StringUtils;
 import kz.message_project.userProject.client.FileSysyemClient;
-import kz.message_project.userProject.dto.ImageDto;
 import kz.message_project.userProject.dto.UserDto;
 import kz.message_project.userProject.entity.User;
 import kz.message_project.userProject.mapper.UserMapper;
 import kz.message_project.userProject.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
@@ -22,13 +22,15 @@ public class UserService {
     private final UserRepository userRepository;
     private final FileSysyemClient fileSysyemClient;
     private final UserMapper userMapper;
+    private final PasswordEncoder passwordEncoder;
 
     public UserDto getUser(Long id){
         UserDto userDto = new UserDto();
         User user = userRepository.findById(id).orElse(null);
+        System.out.println(user != null ? user.toString() : "null");
 
         if (Objects.nonNull(user)){
-            byte [] image = fileSysyemClient.downloadFromMinio(user.getImageMinioName());
+            byte [] image = fileSysyemClient.downloadFromMinio(StringUtils.isNotEmpty(user.getImageMinioName()) ? user.getImageMinioName() : "default.png");
             userDto = userMapper.mapToUserDto(user);
             userDto.setImage(image);
         }
@@ -41,6 +43,7 @@ public class UserService {
         }
         String imageMinioName = fileSysyemClient.uploadToMinio(image);
         user.setImageMinioName(imageMinioName);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         var savedUser = userRepository.save(user);
         return userMapper.mapToUserDto(savedUser);
     }
