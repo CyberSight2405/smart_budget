@@ -1,7 +1,7 @@
 package kz.message_project.userProject.services;
 
 import io.micrometer.common.util.StringUtils;
-import kz.message_project.userProject.client.FileSysyemClient;
+import kz.message_project.userProject.client.FileSystemClient;
 import kz.message_project.userProject.dto.UserDto;
 import kz.message_project.userProject.entity.User;
 import kz.message_project.userProject.mapper.UserMapper;
@@ -20,7 +20,7 @@ import java.util.Objects;
 @Slf4j
 public class UserService {
     private final UserRepository userRepository;
-    private final FileSysyemClient fileSysyemClient;
+    private final FileSystemClient fileSysyemClient;
     private final UserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
 

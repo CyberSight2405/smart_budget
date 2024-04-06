@@ -1,17 +1,15 @@
 package kz.message_project.userProject.services;
 
-import kz.message_project.userProject.client.FileSysyemClient;
+import kz.message_project.userProject.client.FileSystemClient;
 import kz.message_project.userProject.dto.UserDto;
 import kz.message_project.userProject.entity.User;
 import kz.message_project.userProject.mapper.UserMapper;
 import kz.message_project.userProject.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -44,7 +42,7 @@ public class UserServiceTest {
     @Mock
     private UserRepository userRepository;
     @Mock
-    private FileSysyemClient fileSysyemClient;
+    private FileSystemClient fileSysyemClient;
     @Mock
     private UserMapper userMapper;
     @Mock

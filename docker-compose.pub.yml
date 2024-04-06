@@ -20,7 +20,6 @@ services:
             - FILE-SYSTEM-SERVICE=http://files:8081
         networks:
             - nyos_net
-        v
     files:
         image: 'nyos777/file-service-dev'
         container_name: 'nyos-file'

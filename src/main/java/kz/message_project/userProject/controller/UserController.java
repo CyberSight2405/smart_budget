@@ -11,9 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.net.URI;
 import java.util.List;
-import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/user")
@@ -24,10 +22,6 @@ public class UserController {
     @GetMapping("/{id}")
     public ResponseEntity<UserDto> findById(@PathVariable Long id){
         UserDto userDto = userService.getUser(id);
-
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setContentType(MediaType.IMAGE_PNG);
-//        headers.setContentDisposition(ContentDisposition.builder("attachment").filename("pngFile").build());
 
         if (userDto.getId() != null) {
             return ResponseEntity.ok(userDto);
