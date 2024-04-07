@@ -1,6 +1,7 @@
 package kz.message_project.userProject.utils;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class LogUtils {
     private static final String DELIMITER = ",";
@@ -22,8 +23,8 @@ public class LogUtils {
                 DELIMITER + IP + ipAddress +
                 DELIMITER + PATH + requestPath +
                 DELIMITER + METHOD + methodName +
-                DELIMITER + OPERATION_START + operationStart +
-                DELIMITER + OPERATION_END + operationEnd;
+                DELIMITER + OPERATION_START + operationStart.format(DateTimeFormatter.ofPattern("yyyy-MM-dd:HH:mm:ss")) +
+                DELIMITER + OPERATION_END + operationEnd.format(DateTimeFormatter.ofPattern("yyyy-MM-dd:HH:mm:ss"));
     }
 
     public static String createLog(String username,

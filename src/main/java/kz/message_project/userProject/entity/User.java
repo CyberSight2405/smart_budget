@@ -1,5 +1,6 @@
 package kz.message_project.userProject.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -16,12 +17,13 @@ import java.util.Objects;
 @NoArgsConstructor
 @Table(name = "users")
 @Entity
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id")
     @Id
     private Long id;
-    @Column(name = "username")
+    @Column(name = "username", unique = true)
     private String username;
     @Column(name = "name")
     private String name;

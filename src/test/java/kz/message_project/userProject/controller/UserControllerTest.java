@@ -1,161 +1,101 @@
 package kz.message_project.userProject.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import kz.message_project.userProject.client.FileSystemClient;
 import kz.message_project.userProject.dto.UserDto;
+import kz.message_project.userProject.entity.Role;
 import kz.message_project.userProject.entity.User;
-import kz.message_project.userProject.mapper.UserMapper;
-import kz.message_project.userProject.repositories.UserRepository;
 import kz.message_project.userProject.services.JwtService;
 import kz.message_project.userProject.services.UserService;
-import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
-import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.DynamicPropertyRegistry;
-import org.springframework.test.context.DynamicPropertySource;
+import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-import org.testcontainers.containers.PostgreSQLContainer;
-import org.testcontainers.junit.jupiter.Container;
-import org.testcontainers.junit.jupiter.Testcontainers;
-import org.testcontainers.utility.DockerImageName;
+import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.request.MockMultipartHttpServletRequestBuilder;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import java.util.Optional;
+import java.nio.charset.StandardCharsets;
 
-import static kz.message_project.userProject.entity.Role.ADMIN;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@Testcontainers
-@SpringBootTest
-@AutoConfigureMockMvc
-@RequiredArgsConstructor
-class UserControllerTest {
+@WebMvcTest(controllers = UserController.class)
+@AutoConfigureMockMvc(addFilters = false)
+@ExtendWith(MockitoExtension.class)
+public class UserControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
-    @InjectMocks
-    private UserController userController;
-    @Mock
-    private UserRepository userRepository;
-    @Mock
+
+    @MockBean
     private UserService userService;
-    @Mock
-    private FileSystemClient fileSysyemClient;
-    @Mock
+
+    @MockBean
     private JwtService jwtService;
-    @Mock
-    private UserMapper userMapper;
 
     @Autowired
-    private  ObjectMapper objectMapper;
-    private final String baseUrl = "http://localhost:8082/api/user";
+    private ObjectMapper objectMapper;
 
-    private String token;
+    private User user;
+    private UserDto userDto;
 
-    @Container
-    private static final PostgreSQLContainer postgres = new PostgreSQLContainer<>(DockerImageName.parse("postgres:14.11"));
-
-    @DynamicPropertySource
-    static void configureProperties(DynamicPropertyRegistry registry){
-        registry.add("spring.datasource.url", postgres::getJdbcUrl);
-        registry.add("spring.datasource.username", postgres::getUsername);
-        registry.add("spring.datasource.password", postgres::getPassword);
-    }
-
-    @SneakyThrows
     @BeforeEach
-    void setUp() throws Exception {
-        UserDto userDto = UserDto.builder()
-                .id(1L)
-                .username("nyos")
-                .password("qwerty")
-                .email("nyos@gmail.com")
-                .name("Islam")
-                .role(ADMIN)
-                .build();
+    public void init(){
+        user = User.builder().name("Nyos").role(Role.ADMIN).username("NyosPurple").surname("Purple").email("islam_vip02@mail.ru").password("qwerty123").build();
+        userDto = UserDto.builder().name("Nyos").role(Role.USER).username("NyosPurple").surname("Purple").email("islam_vip02@mail.ru").password("qwerty123").build();
 
-        User user = User.builder()
-                .id(1L)
-                .username("nyos")
-                .password("qwerty")
-                .email("nyos@gmail.com")
-                .name("Islam")
-                .role(ADMIN)
-                .build();
-
-        String userDtoJson = objectMapper.writeValueAsString(userDto);
-
-        when(userRepository.findByUsername("nyos")).thenReturn(Optional.of(user));
-
-        MvcResult mvcResult = this.mockMvc
-                .perform(post("http://localhost:8082/api/v1/auth/register")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(userDtoJson))
-                .andExpect(status().isOk()) // Проверяем, что статус ответа 200 (OK)
-                .andReturn();
-
-        String contentAsString = mvcResult.getResponse().getContentAsString();
-        JSONObject jsonObject = new JSONObject(contentAsString);
-        token = "Bearer " + jsonObject.getString("token");
     }
 
-
-
-    @SneakyThrows
     @Test
-    void findById() {
-        UserDto userDto = UserDto.builder()
-                .id(1L)
-                .username("nyos")
-                .email("nyos@gmail.com")
-                .name("Islam")
-                .build();
-
-        User user = User.builder()
-                .username("nyos")
-                .email("nyos@gmail.com")
-                .name("Islam")
-                .build();
-
-        when(userRepository.findById(1L)).thenReturn(Optional.of(user));
-        when(fileSysyemClient.downloadFromMinio(user.getImageMinioName())).thenReturn("image".getBytes());
-        when(userMapper.mapToUserDto(user)).thenReturn(userDto);
-
-        var userList = mockMvc.perform(get(baseUrl+ "/1")
-                        .header("Authorization", token)     )
-                .andExpect(status().is2xxSuccessful())
-                .andReturn();
-
-        String responseUser = userList.getResponse().getContentAsString();
-
-        // Assert
-        assertThat(responseUser).isEqualTo(new ObjectMapper().writeValueAsString(userDto));
+    @WithMockUser(username = "Nyos", roles = {"USER", "ADMIN"})
+    public void UserController_getAllUsers_ReturnedUserList() throws Exception {
+        mockMvc.perform(get("/api/user"))
+                .andExpect(status().isOk())
+                .andDo(MockMvcResultHandlers.print());
     }
 
-//    @Test
-//    @SneakyThrows
-//    void getAllUsers() {
-//
-//        when(userRepository.findAll()).thenReturn(List.of());
-//
-//        var userList = mockMvc.perform(get(baseUrl)
-//                        .header("Authorization", this.token))
-//                .andExpect(status().is2xxSuccessful())
-//                .andReturn();
-//
-//        userList.getResponse().getContentAsString();
-//        assertThat(userList.getResponse().getContentAsString()).isEqualTo(new ObjectMapper().writeValueAsString(userRepository.findAll()));
-//    }
+    @Test
+    @WithMockUser(username = "Nyos", roles = {"USER", "ADMIN"})
+    public void UserController_createUser_ReturnCreated() throws Exception {
+
+        //экземпляр MockMultipartFile для Json
+        MockMultipartFile jsonFile = new MockMultipartFile(
+                "userJson",
+                "json.json",
+                MediaType.APPLICATION_JSON_VALUE,
+                objectMapper.writeValueAsString(userDto).getBytes(StandardCharsets.UTF_8)
+        );
+
+        //экземпляр MockMultipartFile для файла
+        MockMultipartFile file = new MockMultipartFile(
+                "image",
+                "file.png",
+                "multipart/form-data",
+                "file content".getBytes(StandardCharsets.UTF_8)
+        );
+
+        // Создайте многокомпонентный запрос
+        MockMultipartHttpServletRequestBuilder multipart = MockMvcRequestBuilders.multipart("/api/user");
+        multipart.file(jsonFile);
+        multipart.file(file);
+
+        // Выполните запрос
+         ResultActions response = mockMvc.perform(multipart);
+
+         response.andExpect(MockMvcResultMatchers.status().isCreated())
+                 .andExpect(MockMvcResultMatchers.jsonPath("$.username").value(userDto.getUsername()))
+                 .andDo(MockMvcResultHandlers.print());
+
+
+    }
 }

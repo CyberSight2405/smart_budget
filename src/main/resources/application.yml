@@ -30,6 +30,11 @@ spring:
         username: ${DATASOURCE_USERNAME:nyos}
         password: ${DATASOURCE_PASSWORD:purple}
         driver-class-name: org.postgresql.Driver
+    rabbitmq:
+        host: ${RABBIT_HOST:localhost}
+        port: ${RABBIT_PORT:5672}
+        username: ${RABBIT_USERNAME:nyos}
+        password: ${RABBIT_PASSWORD:purple}
 service:
     file-system-service:
         url: ${FILE-SYSTEM-SERVICE:http://localhost:8081}

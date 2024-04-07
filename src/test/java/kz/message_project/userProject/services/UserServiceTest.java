@@ -30,13 +30,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
-@Testcontainers
-@RequiredArgsConstructor
 public class UserServiceTest {
-
-    @Container
-    static private final PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>(DockerImageName.parse("postgres:14.11"));
-
     @InjectMocks
     private UserService userService;
     @Mock
@@ -48,18 +42,7 @@ public class UserServiceTest {
     @Mock
     private PasswordEncoder passwordEncoder;
 
-    @DynamicPropertySource
-    static void setProperties(DynamicPropertyRegistry registry){
-        registry.add("spring.datasource.url", postgres::getJdbcUrl);
-        registry.add("spring.datasource.username", postgres::getUsername);
-        registry.add("spring.datasource.password", postgres::getPassword);
-    }
 
-    @BeforeAll
-    static void runContainer(){
-//        Startables.deepStart(postgres);
-        postgres.start();
-    }
 
 //    @BeforeEach
 //    void setUp() {
