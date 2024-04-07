@@ -1,5 +1,6 @@
 package kz.message_project.userProject.services;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.micrometer.common.util.StringUtils;
 import kz.message_project.userProject.client.FileSystemClient;
 import kz.message_project.userProject.dto.UserDto;
@@ -7,6 +8,7 @@ import kz.message_project.userProject.entity.User;
 import kz.message_project.userProject.mapper.UserMapper;
 import kz.message_project.userProject.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -24,10 +26,10 @@ public class UserService {
     private final UserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
 
+    @SneakyThrows
     public UserDto getUser(Long id){
         UserDto userDto = new UserDto();
         User user = userRepository.findById(id).orElse(null);
-        System.out.println(user != null ? user.toString() : "null");
 
         if (Objects.nonNull(user)){
             byte [] image = fileSysyemClient.downloadFromMinio(StringUtils.isNotEmpty(user.getImageMinioName()) ? user.getImageMinioName() : "default.png");
@@ -59,5 +61,9 @@ public class UserService {
 
     public List<User> getAllUsers() {
         return userRepository.findAll();
+    }
+
+    public String sendJsonToFileService(String jsonFile){
+        return fileSysyemClient.sendAndConsumeJson(jsonFile);
     }
 }

@@ -7,7 +7,6 @@ import kz.message_project.userProject.entity.User;
 import kz.message_project.userProject.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,6 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
+    private final ObjectMapper objectMapper;
 
     @GetMapping("/{id}")
     public ResponseEntity<UserDto> findById(@PathVariable Long id){
@@ -38,7 +38,6 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<User> createUser(@RequestPart("userJson") String userJson, @RequestPart("image") MultipartFile image){
-        ObjectMapper objectMapper = new ObjectMapper();
         User user;
         try {
             user = objectMapper.readValue(userJson, User.class);
@@ -57,5 +56,10 @@ public class UserController {
     @PutMapping("/{id}")
     public void updateUser(@RequestBody User user){
         var userDto = userService.updateUser(user);
+    }
+
+    @GetMapping("/send/json")
+    public ResponseEntity<String> sendJson(@RequestBody String jsonFile){
+        return ResponseEntity.ok(userService.sendJsonToFileService(jsonFile));
     }
 }
