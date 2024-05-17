@@ -1,6 +1,6 @@
 package com.hakaton.financ_administration.configuration;
 
-import kz.message_project.userProject.repositories.UserRepository;
+import com.hakaton.financ_administration.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
