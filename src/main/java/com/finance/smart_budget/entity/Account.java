@@ -1,15 +1,11 @@
 package com.finance.smart_budget.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Index;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Table(name = "account", indexes = {@Index(name = "account_username_index", columnList = "username")})
@@ -28,12 +24,15 @@ public class Account {
     private String username;
 
     @Column(name = "total_balance")
-    private BigDecimal total_balance;
-
+    private BigDecimal totalBalance;
     @Column(name = "cash_balance", precision = 15, scale = 2)
-    private BigDecimal cash_balance;
-
+    private BigDecimal cachBalance;
     @Column(name = "cashless_balance", precision = 15, scale = 2)
-    private BigDecimal cashless_balance;
+    private BigDecimal cachlessBalance;
 
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Card> cards = new ArrayList<>();
+
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Operation> operations = new ArrayList<>();
 }

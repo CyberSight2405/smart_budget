@@ -1,9 +1,7 @@
 version: '3.9'
 services:
     smart-budget:
-        build:
-            context: .
-            dockerfile: Dockerfile
+        image: 'nyos777/smart-budget'
         container_name: 'smart-budget'
         ports:
             - '8081:8081'
@@ -42,4 +40,3 @@ services:
             - finance_data:/var/lib/postgresql/data
 volumes:
     finance_data:
-        name: "finance_data"

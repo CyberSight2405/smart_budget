@@ -1,19 +1,20 @@
 package com.finance.smart_budget.entity;
 
 import com.finance.smart_budget.entity.enums.TypeOperation;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
-@Entity
 @Table(name = "income_expense_item")
+@Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class IncomeExpenseItem {
 
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -28,4 +29,6 @@ public class IncomeExpenseItem {
     @Enumerated(EnumType.STRING)
     private TypeOperation typeOperation;
 
+    @OneToMany(mappedBy = "incomeExpenseItem")
+    private List<Operation> transactions;
 }
