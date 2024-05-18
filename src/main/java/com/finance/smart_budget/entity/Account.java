@@ -25,8 +25,10 @@ public class Account {
 
     @Column(name = "total_balance")
     private BigDecimal totalBalance;
+
     @Column(name = "cash_balance", precision = 15, scale = 2)
     private BigDecimal cachBalance;
+
     @Column(name = "cashless_balance", precision = 15, scale = 2)
     private BigDecimal cachlessBalance;
 

@@ -16,27 +16,31 @@ import java.util.List;
 import java.util.Objects;
 
 @Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
 @Table(name = "users")
 @Entity
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class User implements UserDetails {
+
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id")
     @Id
     private Long id;
+
     @Column(name = "username", unique = true)
     private String username;
+
     @Column(name = "name")
     private String name;
+
     @Column(name = "surname")
     private String surname;
+
     @Column(name = "password")
     private String password;
+
     @Column(name = "email")
     private String email;
+
     @Column(name = "phone")
     private String phone;
 
