@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
+@Entity
 @Table(name = "income_expense_item")
 public class IncomeExpenseItem {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
