@@ -1,7 +1,10 @@
 package com.finance.smart_budget.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -10,6 +13,9 @@ import java.util.List;
 @Data
 @Table(name = "account", indexes = {@Index(name = "account_username_index", columnList = "username")})
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Account {
 
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
