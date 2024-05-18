@@ -1,16 +1,13 @@
 package com.finance.smart_budget.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
-@Data
+import java.util.List;
+
 @Entity
 @Table(name = "bank")
+@Data
 public class Bank {
 
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -24,4 +21,6 @@ public class Bank {
     @Column(name = "external_id")
     private String externalId;
 
+    @OneToMany(mappedBy = "bank", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Card> cards;
 }
