@@ -1,89 +1,123 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="7095d10f-544b-40c0-8796-5082f7f51d7e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.pub.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kz/message_project/userProject/UserServicesApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kz/message_project/userProject/aop/ClientAspect.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kz/message_project/userProject/aop/ControllerAspect.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kz/message_project/userProject/aop/ServiceAspect.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kz/message_project/userProject/client/FileSystemClient.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kz/message_project/userProject/configuration/ApplicationConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kz/message_project/userProject/configuration/JwtAuthenticationFilter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kz/message_project/userProject/configuration/SecurityConfiguration.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kz/message_project/userProject/controller/AuthenticationController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kz/message_project/userProject/controller/UserController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kz/message_project/userProject/dto/AuthenticationDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kz/message_project/userProject/dto/AuthenticationResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kz/message_project/userProject/dto/ImageDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kz/message_project/userProject/dto/UserDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kz/message_project/userProject/entity/Role.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kz/message_project/userProject/entity/User.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kz/message_project/userProject/mapper/UserMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kz/message_project/userProject/repositories/UserRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kz/message_project/userProject/services/AuthenticationService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kz/message_project/userProject/services/JwtService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kz/message_project/userProject/services/UserService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kz/message_project/userProject/utils/CustomResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kz/message_project/userProject/utils/CustomStatus.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kz/message_project/userProject/utils/LogUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kz/message_project/userProject/utils/UserUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/kz/message_project/userProject/TestLauncher.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/kz/message_project/userProject/controller/UserControllerTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/kz/message_project/userProject/mapper/UserMapperTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/kz/message_project/userProject/repositories/UserRepositoryTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/kz/message_project/userProject/services/UserServiceTest.java" beforeDir="false" />
+    <list default="true" id="e4f688cb-2e9c-447e-af49-c506929137f6" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/finance/smart_budget/entity/Account.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/finance/smart_budget/entity/AccountCards.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/finance/smart_budget/entity/Bank.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/finance/smart_budget/entity/Card.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/finance/smart_budget/entity/IncomeExpenseItem.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/finance/smart_budget/entity/Operation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/finance/smart_budget/entity/TypeOperation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../finance_administration/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../finance_administration/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../finance_administration/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../finance_administration/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../finance_administration/src/main/java/com/hakaton/financ_administration/controller/AuthenticationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../finance_administration/src/main/java/com/hakaton/financ_administration/controller/AuthenticationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../finance_administration/src/main/java/com/hakaton/financ_administration/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../finance_administration/src/main/java/com/hakaton/financ_administration/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../finance_administration/src/main/java/com/hakaton/financ_administration/dto/UserDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/../finance_administration/src/main/java/com/hakaton/financ_administration/dto/UserDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../finance_administration/src/main/java/com/hakaton/financ_administration/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/../finance_administration/src/main/java/com/hakaton/financ_administration/entity/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../finance_administration/src/main/java/com/hakaton/financ_administration/services/AuthenticationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../finance_administration/src/main/java/com/hakaton/financ_administration/services/AuthenticationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../finance_administration/src/main/java/com/hakaton/financ_administration/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../finance_administration/src/main/java/com/hakaton/financ_administration/services/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../finance_administration/src/main/resources/application.properties" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Class" />
+      </list>
+    </option>
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "Nyos777"
-  }
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="KubernetesApiPersistence"><![CDATA[{}]]></component>
+  <component name="KubernetesApiProvider"><![CDATA[{
+  "isMigrated": true
 }]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/Nyos777/UserServices.git",
-    "accountId": "8f756f03-7bf8-451e-81ce-c5726cdcb9b2"
-  }
-}]]></component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
   <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 4
+  "associatedIndex": 8
 }]]></component>
-  <component name="ProjectId" id="2gMg5duuZ05IBxAcYcnFoMG9tko" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectId" id="2gdPd5QObMe4ZgtCx1JtgQsEjPw" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Docker.docker-compose.yml.finance-db: Compose Deployment.executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Spring Boot.SmartBudgetApplication.executor": "Run",
     "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/SoftwareEngineering",
+    "last_opened_file_path": "D:/SoftwareEngineering/smart_budget",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "show.migrate.to.gradle.popup": "false",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\SoftwareEngineering\smart_budget" />
+      <recent name="D:\SoftwareEngineering\smart_budget\src\main\java\com\finance\smart_budget" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Spring Boot.SmartBudgetApplication">
+    <configuration name="SmartBudgetApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="smart_budget" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.finance.smart_budget.SmartBudgetApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
+      <deployment type="docker-compose.yml" />
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yml.finance-db: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="finance-db" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Docker.docker-compose.yml.finance-db: Compose Deployment" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -95,12 +129,12 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="7095d10f-544b-40c0-8796-5082f7f51d7e" name="Changes" comment="" />
-      <created>1715512679267</created>
+      <changelist id="e4f688cb-2e9c-447e-af49-c506929137f6" name="Changes" comment="" />
+      <created>1716024568583</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1715512679267</updated>
-      <workItem from="1715512681306" duration="90000" />
+      <updated>1716024568583</updated>
+      <workItem from="1716024569660" duration="3548000" />
     </task>
     <servers />
   </component>

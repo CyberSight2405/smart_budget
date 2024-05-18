@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: "smart_budget"
+  main:
+    banner-mode: off
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  datasource:
+    url: ${DATASOURCE_URL:jdbc:postgresql://localhost:5437/financeDB}
+    username: ${DATASOURCE_USERNAME:finance}
+    password: ${DATASOURCE_PASSWORD:finance}
+    driver-class-name: org.postgresql.Driver

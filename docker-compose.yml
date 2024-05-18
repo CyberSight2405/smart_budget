@@ -1,0 +1,16 @@
+version: '3.9'
+services:
+    finance-db:
+        image: 'postgres:14.11'
+        container_name: 'financeDB'
+        ports:
+            - '5437:5432'
+        environment:
+            - POSTGRES_USER=finance
+            - POSTGRES_PASSWORD=finance
+            - POSTGRES_DB=financeDB
+        restart: always
+        volumes:
+            - finance_data:/var/lib/postgresql/data
+volumes:
+    finance_data:
