@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Builder
-public class OperationResponse {
+public class OperationDto {
 
     private BigDecimal sum;
 
