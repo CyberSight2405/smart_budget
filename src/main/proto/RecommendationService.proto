@@ -1,0 +1,14 @@
+syntax = "proto3";
+package com.hakaton.recommender.grpc;
+
+message RecommendationRequest {
+  string username = 1;
+}
+
+message RecommendationResponse {
+  string recommendation = 1;
+}
+
+service RecommendationService {
+  rpc get(RecommendationRequest) returns (RecommendationResponse);
+}
